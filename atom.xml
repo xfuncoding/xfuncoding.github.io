@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://https://xfuncoding.github.io/</id>
+    <id>http://https://xfuncoding.github.io/</id>
     <title>xfuncoding</title>
-    <updated>2020-03-05T01:47:00.791Z</updated>
+    <updated>2020-03-05T01:52:41.705Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://https://xfuncoding.github.io/"/>
-    <link rel="self" href="https://https://xfuncoding.github.io/atom.xml"/>
+    <link rel="alternate" href="http://https://xfuncoding.github.io/"/>
+    <link rel="self" href="http://https://xfuncoding.github.io/atom.xml"/>
     <subtitle>技术实践之路</subtitle>
-    <logo>https://https://xfuncoding.github.io/images/avatar.png</logo>
-    <icon>https://https://xfuncoding.github.io/favicon.ico</icon>
+    <logo>http://https://xfuncoding.github.io/images/avatar.png</logo>
+    <icon>http://https://xfuncoding.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xfuncoding</rights>
 </feed>
