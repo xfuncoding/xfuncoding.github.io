@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://https://xfuncoding.github.io/</id>
+    <id>http://http://xfuncoding.github.io/</id>
     <title>xfuncoding</title>
-    <updated>2020-04-28T10:49:15.192Z</updated>
+    <updated>2020-04-28T10:51:14.481Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://https://xfuncoding.github.io/"/>
-    <link rel="self" href="http://https://xfuncoding.github.io/atom.xml"/>
+    <link rel="alternate" href="http://http://xfuncoding.github.io/"/>
+    <link rel="self" href="http://http://xfuncoding.github.io/atom.xml"/>
     <subtitle>技术实践之路</subtitle>
-    <logo>http://https://xfuncoding.github.io/images/avatar.png</logo>
-    <icon>http://https://xfuncoding.github.io/favicon.ico</icon>
+    <logo>http://http://xfuncoding.github.io/images/avatar.png</logo>
+    <icon>http://http://xfuncoding.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xfuncoding</rights>
     <entry>
         <title type="html"><![CDATA[在Laravel中使用Yar]]></title>
-        <id>http://https://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/</id>
-        <link href="http://https://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/">
+        <id>http://http://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/</id>
+        <link href="http://http://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/">
         </link>
         <updated>2020-04-28T09:21:20.000Z</updated>
         <content type="html"><![CDATA[<h3 id="安装扩展包">安装扩展包</h3>
