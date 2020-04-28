@@ -1,20 +1,13 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在Laravel中使用Yar | xfuncoding</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://https://xfuncoding.github.io//favicon.ico?v=1588070246889">
+<link rel="shortcut icon" href="http://https://xfuncoding.github.io//favicon.ico?v=1588070562539">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="http://https://xfuncoding.github.io//styles/main.css">
-
-
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="alternate" type="application/atom+xml" title="在Laravel中使用Yar | xfuncoding - Atom Feed" href="http://https://xfuncoding.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
@@ -24,63 +17,64 @@ https://pecl.php.net/package/yar/2.0.7/windows
 2.将扩展放到php下的ext目录
 3.修改配置文件，添加依赖 extension=php_yar...." />
     <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="http://https://xfuncoding.github.io/">
-        <img src="http://https://xfuncoding.github.io//images/avatar.png?v=1588070246889" class="site-logo">
-        <h1 class="site-title">xfuncoding</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="http://https://xfuncoding.github.io/">
+  <img class="avatar" src="http://https://xfuncoding.github.io//images/avatar.png?v=1588070562539" alt="">
+  </a>
+  <h1 class="site-title">
+    xfuncoding
+  </h1>
+  <p class="site-description">
+    技术实践之路
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-    </div>
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      技术实践之路
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/xfuncoding/" target="_blank">Gridea</a> | <a class="rss" href="http://https://xfuncoding.github.io//atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">在Laravel中使用Yar</h2>
-            <div class="post-date">2020-04-28</div>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              在Laravel中使用Yar
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-28
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
             
-            <div class="post-content" v-pre>
-              <h3 id="安装扩展包">安装扩展包</h3>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="安装扩展包">安装扩展包</h3>
 <p><strong>https://pecl.php.net/package/yar/2.0.7/windows</strong></p>
 <p>1.找到php对应的版本下的扩展<br>
 2.将扩展放到php下的ext目录<br>
@@ -146,36 +140,82 @@ return [
 dump($d-&gt;getStorageSkuStock([&quot;storage_id&quot; =&gt; 17, &quot;sku&quot; =&gt; &quot;LB10016-MQC5592-L&quot;]));
 </code></pre>
 
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E5%8C%85">安装扩展包</a></li>
+<li><a href="#laravel%E4%B8%AD%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">laravel中的准备工作</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BB%A3%E7%A0%81">服务端代码</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE">客户端配置</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B0%83%E7%94%A8">客户端调用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
             </div>
-            
-            
-
-            
-
-          </div>
-
+          </article>
         </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/xfuncoding/" target="_blank">Gridea</a>
+  <a class="rss" href="http://https://xfuncoding.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
       </div>
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script type="application/javascript">
+    <script>
+      hljs.initHighlightingOnLoad()
 
-AOS.init();
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
-</script>
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
-
-
-
+    </script>
   </body>
 </html>
