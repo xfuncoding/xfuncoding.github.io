@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>在Laravel中使用Yar | xfuncoding</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="http://https://xfuncoding.github.io//favicon.ico?v=1588070176060">
+<link rel="stylesheet" href="http://https://xfuncoding.github.io//styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="安装扩展包
+https://pecl.php.net/package/yar/2.0.7/windows
+1.找到php对应的版本下的扩展
+2.将扩展放到php下的ext目录
+3.修改配置文件，添加依赖 extension=php_yar...." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://https://xfuncoding.github.io/">
+        <img src="http://https://xfuncoding.github.io//images/avatar.png?v=1588070176060" class="site-logo">
+        <h1 class="site-title">xfuncoding</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      技术实践之路
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/xfuncoding/" target="_blank">Gridea</a> | <a class="rss" href="http://https://xfuncoding.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">在Laravel中使用Yar</h2>
+            <div class="post-date">2020-04-28</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="安装扩展包">安装扩展包</h3>
+<p><strong>https://pecl.php.net/package/yar/2.0.7/windows</strong></p>
+<p>1.找到php对应的版本下的扩展<br>
+2.将扩展放到php下的ext目录<br>
+3.修改配置文件，添加依赖 <code>extension=php_yar.dll</code></p>
+<h3 id="laravel中的准备工作">laravel中的准备工作</h3>
+<ol>
+<li><code>composer require reprover/laravel-yar -vvv</code>      //安装扩展包</li>
+<li><code>php artisan vendor:publish --tag=&quot;laravel-yar&quot;</code>   //生成配置文件</li>
+<li>将根目录下的/vendor/reprover/laravel-yar/config中的三个文件（ yar.php：yar 运行时配置   yar-services.php：rpc 服务注册映射表    yar-map.php：mapName 与 接口参数对应表）复制到根目录的config目录下</li>
+<li>修改服务端中间件跳过csrf验证 <code>app/Http/Middleware/VerifyCsrfToken.php 中的 except 数组中加上 protected $except = [ '/yar/*', ];</code></li>
+</ol>
+<h3 id="服务端代码">服务端代码</h3>
+<pre><code>&lt;?php
+namespace App\Services;
+
+use App\Http\Service\Storage\ErpStorageStockService;
+use Reprover\LaravelYar\YarService;
+
+class StorageStockServices extends YarService
+{
+    /**
+     * 获取库存
+     * @param $request
+     * @return mixed
+     */
+    public static function getStorageSkuStock($request)
+    {
+        return app(ErpStorageStockService::class)-&gt;getStorageSkuStock($request['storage_id'],$request['sku']);
+    }
+
+}
+</code></pre>
+<h3 id="客户端配置">客户端配置</h3>
+<ol>
+<li>在config 目录下 配置yar-service.php文件</li>
+</ol>
+<pre><code>&lt;?php
+
+return [
+    'Example' =&gt; [
+        'path' =&gt; 'http://resource.test/yar/', 'services' =&gt; [
+            'ExampleService' =&gt; 'Example', //服务1
+            'Example2Service' =&gt; 'Example2', //服务2 
+        ]
+    ],
+]
+</code></pre>
+<ol start="2">
+<li>在yar-map中配置</li>
+</ol>
+<pre><code>return [
+    'get_example' =&gt; [
+        'module' =&gt; 'Example',
+        'service' =&gt; 'ExampleService',
+        'method' =&gt; 'getExample',
+        'connect_timeout' =&gt; 1000,
+        'read_timeout' =&gt; 5000,
+    ],
+]
+</code></pre>
+<h3 id="客户端调用">客户端调用</h3>
+<pre><code>$d = new \Yar_Client('http://127.0.0.1:8082/yar/StorageStockServices');
+dump($d-&gt;getStorageSkuStock([&quot;storage_id&quot; =&gt; 17, &quot;sku&quot; =&gt; &quot;LB10016-MQC5592-L&quot;]));
+</code></pre>
+
+            </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

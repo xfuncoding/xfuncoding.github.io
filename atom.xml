@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://https://xfuncoding.github.io/</id>
     <title>xfuncoding</title>
-    <updated>2020-03-05T01:52:41.705Z</updated>
+    <updated>2020-04-28T10:36:20.469Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://https://xfuncoding.github.io/"/>
     <link rel="self" href="http://https://xfuncoding.github.io/atom.xml"/>
@@ -10,4 +10,77 @@
     <logo>http://https://xfuncoding.github.io/images/avatar.png</logo>
     <icon>http://https://xfuncoding.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, xfuncoding</rights>
+    <entry>
+        <title type="html"><![CDATA[在Laravel中使用Yar]]></title>
+        <id>http://https://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/</id>
+        <link href="http://https://xfuncoding.github.io/post/zai-laravel-zhong-shi-yong-yar/">
+        </link>
+        <updated>2020-04-28T09:21:20.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="安装扩展包">安装扩展包</h3>
+<p><strong>https://pecl.php.net/package/yar/2.0.7/windows</strong></p>
+<p>1.找到php对应的版本下的扩展<br>
+2.将扩展放到php下的ext目录<br>
+3.修改配置文件，添加依赖 <code>extension=php_yar.dll</code></p>
+<h3 id="laravel中的准备工作">laravel中的准备工作</h3>
+<ol>
+<li><code>composer require reprover/laravel-yar -vvv</code>      //安装扩展包</li>
+<li><code>php artisan vendor:publish --tag=&quot;laravel-yar&quot;</code>   //生成配置文件</li>
+<li>将根目录下的/vendor/reprover/laravel-yar/config中的三个文件（ yar.php：yar 运行时配置   yar-services.php：rpc 服务注册映射表    yar-map.php：mapName 与 接口参数对应表）复制到根目录的config目录下</li>
+<li>修改服务端中间件跳过csrf验证 <code>app/Http/Middleware/VerifyCsrfToken.php 中的 except 数组中加上 protected $except = [ '/yar/*', ];</code></li>
+</ol>
+<h3 id="服务端代码">服务端代码</h3>
+<pre><code>&lt;?php
+namespace App\Services;
+
+use App\Http\Service\Storage\ErpStorageStockService;
+use Reprover\LaravelYar\YarService;
+
+class StorageStockServices extends YarService
+{
+    /**
+     * 获取库存
+     * @param $request
+     * @return mixed
+     */
+    public static function getStorageSkuStock($request)
+    {
+        return app(ErpStorageStockService::class)-&gt;getStorageSkuStock($request['storage_id'],$request['sku']);
+    }
+
+}
+</code></pre>
+<h3 id="客户端配置">客户端配置</h3>
+<ol>
+<li>在config 目录下 配置yar-service.php文件</li>
+</ol>
+<pre><code>&lt;?php
+
+return [
+    'Example' =&gt; [
+        'path' =&gt; 'http://resource.test/yar/', 'services' =&gt; [
+            'ExampleService' =&gt; 'Example', //服务1
+            'Example2Service' =&gt; 'Example2', //服务2 
+        ]
+    ],
+]
+</code></pre>
+<ol start="2">
+<li>在yar-map中配置</li>
+</ol>
+<pre><code>return [
+    'get_example' =&gt; [
+        'module' =&gt; 'Example',
+        'service' =&gt; 'ExampleService',
+        'method' =&gt; 'getExample',
+        'connect_timeout' =&gt; 1000,
+        'read_timeout' =&gt; 5000,
+    ],
+]
+</code></pre>
+<h3 id="客户端调用">客户端调用</h3>
+<pre><code>$d = new \Yar_Client('http://127.0.0.1:8082/yar/StorageStockServices');
+dump($d-&gt;getStorageSkuStock([&quot;storage_id&quot; =&gt; 17, &quot;sku&quot; =&gt; &quot;LB10016-MQC5592-L&quot;]));
+</code></pre>
+]]></content>
+    </entry>
 </feed>
